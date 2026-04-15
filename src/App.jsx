@@ -37,6 +37,27 @@ const Skills = () => {
   );
 };
 
+// --- COMPONENTE DE TARJETA DE CERTIFICADO (ACTUALIZADO CON EFECTO HOVER) ---
+const CertificateCard = ({ title, institution, date, imageUrl }) => (
+  <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.5)] flex flex-col gap-4 cursor-pointer">
+    {/* Contenedor de la Imagen (Mantiene el tamaño que definimos antes) */}
+    <div className="w-full h-56 bg-slate-950 rounded-lg overflow-hidden flex items-center justify-center border border-slate-800">
+      <img 
+        src={imageUrl} 
+        alt={title} 
+        className="w-full h-full object-contain p-2" 
+      />
+    </div>
+    
+    {/* Textos de la Tarjeta */}
+    <div>
+      <h3 className="text-xl font-bold text-white">{title}</h3>
+      <p className="text-blue-400 text-sm font-medium mt-1">{institution}</p>
+      <p className="text-slate-500 text-xs mt-1">{date}</p>
+    </div>
+  </div>
+);
+
 // --- COMPONENTE DE EXPERIENCIA ---
 const Experience = () => {
   const jobs = [
@@ -178,6 +199,29 @@ function App() {
           <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition">
             <h3 className="text-xl font-bold mb-2">Dolar-App</h3>
             <p className="text-slate-400 text-sm">Dashboard dockerizado con monitoreo integrado mediante Uptime Kuma.</p>
+          </div>
+        </div>
+      </section>
+
+     {/* SECCIÓN CERTIFICACIONES (UNIFICADA CON ESTILO DE PROYECTOS) */}
+      <section className="py-20 px-10 bg-slate-800/30 border-t border-slate-800">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 text-blue-300">Certificaciones</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <CertificateCard 
+              title="> Talentos Digitales_"
+              institution="UNNE, Corrientes Telecomunicaciones SAPEM (TelCo) y Polo IT Corrientes"
+              date="2025"
+              imageUrl="/SOLIS ROJAS Diego Fernando.TD.jpg" 
+            />
+            
+            <CertificateCard 
+              title="Seguridad Informática"
+              institution="Educación IT / Especialista"
+              date="2021"
+              imageUrl="/Diego-Fernando Solis Rojas-SI.jpg"
+            />
           </div>
         </div>
       </section>
