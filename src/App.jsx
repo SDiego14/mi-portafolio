@@ -1,5 +1,23 @@
 import React from 'react';
 
+// --- NAVBAR FIJO (Modo Oscuro Siempre) ---
+const Navbar = () => (
+  <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-800 z-50 transition-colors duration-300">
+    <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <span className="font-bold text-xl text-blue-400">DS</span>
+      
+      <div className="flex items-center gap-6">
+        <div className="hidden md:flex gap-6 text-sm font-medium text-slate-300">
+          <a href="#" className="hover:text-blue-400 transition">Inicio</a>
+          <a href="#proyectos" className="hover:text-blue-400 transition">Proyectos</a>
+          <a href="#certificaciones" className="hover:text-blue-400 transition">Certificados</a>
+          <a href="#contacto" className="hover:text-blue-400 transition">Contacto</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+);
+
 // --- COMPONENTE DE HABILIDADES ---
 const Skills = () => {
   return (
@@ -37,25 +55,18 @@ const Skills = () => {
   );
 };
 
-// --- COMPONENTE DE TARJETA DE CERTIFICADO (ACTUALIZADO CON EFECTO HOVER) ---
+// --- COMPONENTE DE TARJETA DE CERTIFICADO ---
 const CertificateCard = ({ title, institution, date, imageUrl }) => (
-  <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.5)] flex flex-col gap-4 cursor-pointer">
-    {/* Contenedor de la Imagen (Mantiene el tamaño que definimos antes) */}
-    <div className="w-full h-56 bg-slate-950 rounded-lg overflow-hidden flex items-center justify-center border border-slate-800">
-      <img 
-        src={imageUrl} 
-        alt={title} 
-        className="w-full h-full object-contain p-2" 
-      />
-    </div>
-    
-    {/* Textos de la Tarjeta */}
-    <div>
-      <h3 className="text-xl font-bold text-white">{title}</h3>
-      <p className="text-blue-400 text-sm font-medium mt-1">{institution}</p>
-      <p className="text-slate-500 text-xs mt-1">{date}</p>
-    </div>
-  </div>
+  <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 hover:border-blue-500 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_10px_30px_-10px_rgba(59,130,246,0.5)] flex flex-col gap-4 cursor-pointer">
+    <div className="w-full h-56 bg-slate-950 rounded-lg overflow-hidden flex items-center justify-center border border-slate-800">
+      <img src={imageUrl} alt={title} className="w-full h-full object-contain p-2" />
+    </div>
+    <div>
+      <h3 className="text-xl font-bold text-white">{title}</h3>
+      <p className="text-blue-400 text-sm font-medium mt-1">{institution}</p>
+      <p className="text-slate-500 text-xs mt-1">{date}</p>
+    </div>
+  </div>
 );
 
 // --- COMPONENTE DE EXPERIENCIA ---
@@ -110,30 +121,70 @@ const Experience = () => {
 // --- COMPONENTE DE EDUCACIÓN ---
 const Education = () => {
   return (
-    <section className="py-20 bg-slate-800/30 px-10 border-t border-slate-800">
+    <section id="educacion" className="py-20 bg-slate-800/30 px-10 border-t border-slate-800">
       <h2 className="text-3xl font-bold text-center text-blue-300 mb-12">Formación Académica</h2>
       <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-        <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
+        
+        {/* Licenciatura - Texto */}
+        <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg flex flex-col justify-center">
           <span className="text-blue-400 text-sm font-mono">2019 – Presente</span>
           <h3 className="text-xl font-bold text-white mt-2">Licenciatura en Sistemas de la Información</h3>
           <p className="text-slate-400">Universidad Nacional del Nordeste (UNNE)</p>
-          <p className="text-slate-500 text-sm mt-3">Estudiante de 5to año con enfoque en arquitectura de sistemas.</p>
+          <p className="text-slate-500 text-sm mt-3">Estudiante avanzado con enfoque en arquitectura de sistemas y gestión de proyectos IT.</p>
         </div>
-        <div className="bg-slate-900 p-6 rounded-xl border border-slate-700 shadow-lg">
-          <span className="text-emerald-400 text-sm font-mono">Finalizada en 2025</span>
-          <h3 className="text-xl font-bold text-white mt-2">Diplomatura en Software Libre</h3>
-          <p className="text-slate-400">FaCENA - UNNE</p>
-          <p className="text-slate-500 text-sm mt-3">Especialización en administración de servidores Linux e infraestructura.</p>
+
+        {/* Diplomatura - Ahora con el CertificateCard integrado */}
+        <div className="flex flex-col gap-4">
+          <div className="bg-slate-900 p-6 rounded-t-xl border-x border-t border-slate-700 shadow-lg">
+            <span className="text-emerald-400 text-sm font-mono">Finalizada en 2025</span>
+            <h3 className="text-xl font-bold text-white mt-2">Diplomatura en Software Libre</h3>
+            <p className="text-slate-400">FaCENA - UNNE</p>
+          </div>
+          {/* Reutilizamos tu CertificateCard aquí para mostrar el JPG */}
+          <CertificateCard 
+            title="Certificado"
+            institution="UNNE"
+            date="Diciembre 2025"
+            imageUrl="Diplomatura.jpg" 
+          />
         </div>
+
       </div>
     </section>
   );
 };
 
+// --- COMPONENTE DE CONTACTO ---
+const ContactForm = () => (
+  <section id="contacto" className="py-20 px-10 bg-slate-900 border-t border-slate-800">
+    <div className="max-w-2xl mx-auto">
+      <h2 className="text-3xl font-bold text-center mb-12 text-blue-300">Contacto</h2>
+      <form action="https://formspree.io/f/tu-codigo" method="POST" className="space-y-6">
+        <div>
+          <label className="block text-slate-400 text-sm mb-2">Nombre</label>
+          <input name="name" type="text" required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:border-blue-500 outline-none transition" placeholder="Tu nombre..." />
+        </div>
+        <div>
+          <label className="block text-slate-400 text-sm mb-2">Email</label>
+          <input name="email" type="email" required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:border-blue-500 outline-none transition" placeholder="tu@email.com" />
+        </div>
+        <div>
+          <label className="block text-slate-400 text-sm mb-2">Mensaje</label>
+          <textarea name="message" rows="4" required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:border-blue-500 outline-none transition" placeholder="Hola Diego, me interesa tu perfil..."></textarea>
+        </div>
+        <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition shadow-lg">
+          Enviar Mensaje
+        </button>
+      </form>
+    </div>
+  </section>
+);
+
 // --- COMPONENTE PRINCIPAL ---
 function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-white font-sans scroll-smooth">
+      <Navbar />
       
       {/* SECCIÓN HERO */}
       <header className="h-screen flex flex-col justify-center items-center text-center p-5 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-slate-900">
@@ -144,31 +195,10 @@ function App() {
           Desarrollador Full Stack & Especialista en Infraestructura Tecnológica.
         </p>
         
-        {/* BOTONES DE ACCIÓN Y REDES SOCIALES */}
         <div className="mt-8 flex gap-4 flex-wrap justify-center">
-          <a 
-            href="https://github.com/SDiego14" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="bg-slate-800 border border-slate-700 hover:border-blue-500 px-6 py-3 rounded-full font-semibold transition flex items-center gap-2"
-          >
-            GitHub
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/diego-solis-9977a2277/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="bg-[#0077b5] hover:bg-[#005885] px-6 py-3 rounded-full font-semibold transition"
-          >
-            LinkedIn
-          </a>
-          <a 
-           href="/Cv-Solis Rojas_Diego Fernando.pdf" 
-           download="Cv-Solis Rojas_Diego Fernando.pdf"
-           className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full font-semibold transition shadow-lg"
-        >
-           Descargar CV (PDF)
-          </a>
+          <a href="https://github.com/SDiego14" target="_blank" rel="noopener noreferrer" className="bg-slate-800 border border-slate-700 hover:border-blue-500 px-6 py-3 rounded-full font-semibold transition flex items-center gap-2">GitHub</a>
+          <a href="https://www.linkedin.com/in/diego-solis-9977a2277/" target="_blank" rel="noopener noreferrer" className="bg-[#0077b5] hover:bg-[#005885] px-6 py-3 rounded-full font-semibold transition">LinkedIn</a>
+          <a href="/Cv-Solis Rojas_Diego Fernando.pdf" download="Cv-Solis Rojas_Diego Fernando.pdf" className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full font-semibold transition shadow-lg">Descargar CV (PDF)</a>
         </div>
       </header>
 
@@ -183,12 +213,11 @@ function App() {
         </div>
       </section>
 
-      {/* SECCIONES TÉCNICAS */}
       <Skills />
       <Experience />
       <Education />
 
-      {/* SECCIÓN PROYECTOS (RESUMIDA) */}
+      {/* SECCIÓN PROYECTOS */}
       <section id="proyectos" className="py-20 px-10 bg-slate-800/50">
         <h2 className="text-3xl font-bold text-center mb-12 text-blue-300">Proyectos Destacados</h2>
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -203,19 +232,17 @@ function App() {
         </div>
       </section>
 
-     {/* SECCIÓN CERTIFICACIONES (UNIFICADA CON ESTILO DE PROYECTOS) */}
-      <section className="py-20 px-10 bg-slate-800/30 border-t border-slate-800">
+     {/* SECCIÓN CERTIFICACIONES */}
+      <section id="certificaciones" className="py-20 px-10 bg-slate-800/30 border-t border-slate-800">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 text-blue-300">Certificaciones</h2>
-          
           <div className="grid md:grid-cols-2 gap-8">
             <CertificateCard 
               title="> Talentos Digitales_"
-              institution="UNNE, Corrientes Telecomunicaciones SAPEM (TelCo) y Polo IT Corrientes"
+              institution="UNNE, TelCo y Polo IT Corrientes"
               date="2025"
               imageUrl="/SOLIS ROJAS Diego Fernando.TD.jpg" 
             />
-            
             <CertificateCard 
               title="Seguridad Informática"
               institution="Educación IT / Especialista"
@@ -226,7 +253,8 @@ function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      <ContactForm />
+
       <footer className="py-10 text-center text-slate-500 border-t border-slate-800">
         <p>© 2026 Diego Fernando Solis Rojas - Corrientes, Argentina</p>
       </footer>
